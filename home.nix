@@ -1,9 +1,10 @@
-{ pkgs, ... }: 
-let 
+{ pkgs, ... }:
+let
   sessionVariables = {
     EDITOR = "code";
   };
-in {
+in
+{
   home = {
     enableNixpkgsReleaseCheck = false; # DISABLE ONE DAY
     stateVersion = "24.05";
@@ -12,8 +13,9 @@ in {
     sessionVariables = sessionVariables;
     preferXdgDirectories = true;
 
-    packages = [
-      pkgs.nil
+    packages = with pkgs; [
+      nil
+      nixfmt-rfc-style
     ];
   };
 
@@ -21,20 +23,21 @@ in {
 
   programs = {
     home-manager.enable = true;
-      zsh = {
+
+    zsh = {
       enable = true;
       sessionVariables = sessionVariables;
       dotDir = ".config/zsh";
       history.path = ".cache/zsh/history";
-    }; 
-    
+    };
+
     git = {
       enable = true;
       userName = "Palani Johnson";
       userEmail = "palanijohnson@gmail.com";
       extraConfig.init.defaultBranch = "main";
-    }; 
-    
+    };
+
     nushell = {
       enable = true;
       extraConfig = builtins.readFile ./nushell/config.nu;
@@ -50,7 +53,7 @@ in {
         battery.disabled = true;
       };
     };
-    
+
     direnv = {
       enable = true;
       enableZshIntegration = true;
