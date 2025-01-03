@@ -15,7 +15,6 @@ in
     packages = with pkgs; [
       nixd
       nixfmt-rfc-style
-      lean4
     ];
   };
 
@@ -51,6 +50,7 @@ in
         "$schema" = "https://starship.rs/config-schema.json";
 
         battery.disabled = true;
+        shell.disabled = false;
       };
     };
   };
