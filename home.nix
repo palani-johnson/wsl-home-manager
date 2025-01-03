@@ -6,16 +6,16 @@ let
 in
 {
   home = {
-    enableNixpkgsReleaseCheck = false; # DISABLE ONE DAY
-    stateVersion = "24.05";
+    stateVersion = "24.11";
     username = "nixos";
     homeDirectory = "/home/nixos";
     sessionVariables = sessionVariables;
     preferXdgDirectories = true;
 
     packages = with pkgs; [
-      nil
+      nixd
       nixfmt-rfc-style
+      lean4
     ];
   };
 
@@ -31,16 +31,16 @@ in
       history.path = ".cache/zsh/history";
     };
 
+    nushell = {
+      enable = true;
+      extraConfig = builtins.readFile ./nushell/config.nu;
+    };
+
     git = {
       enable = true;
       userName = "Palani Johnson";
       userEmail = "palanijohnson@gmail.com";
       extraConfig.init.defaultBranch = "main";
-    };
-
-    nushell = {
-      enable = true;
-      extraConfig = builtins.readFile ./nushell/config.nu;
     };
 
     starship = {
@@ -52,13 +52,6 @@ in
 
         battery.disabled = true;
       };
-    };
-
-    direnv = {
-      enable = true;
-      enableZshIntegration = true;
-      nix-direnv.enable = true;
-      silent = true;
     };
   };
 }
