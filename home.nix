@@ -28,11 +28,12 @@ in
       sessionVariables = sessionVariables;
       dotDir = ".config/zsh";
       history.path = ".cache/zsh/history";
+      initExtra = builtins.readFile ./zsh/initExtra.zsh;
     };
 
     nushell = {
       enable = true;
-      extraConfig = builtins.readFile ./nushell/config.nu;
+      extraConfig = builtins.readFile ./nushell/extraConfig.nu;
     };
 
     git = {

@@ -28,3 +28,8 @@ $env.config = {
         use_ls_colors: true
     }
 }
+
+# Dev shell patches
+
+alias nix-shell = nix-shell --run nu
+alias "nix develop" = nix develop -c nu
