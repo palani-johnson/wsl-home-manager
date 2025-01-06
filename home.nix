@@ -1,10 +1,8 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   sessionVariables = {
     EDITOR = "code";
   };
-in
-{
+in {
   home = {
     stateVersion = "24.11";
     username = "nixos";
@@ -14,7 +12,7 @@ in
 
     packages = with pkgs; [
       nixd
-      nixfmt-rfc-style
+      alejandra
     ];
   };
 
@@ -50,8 +48,14 @@ in
       settings = {
         "$schema" = "https://starship.rs/config-schema.json";
 
-        battery.disabled = true;
+        format = "$username$hostname$directory$fill$git_branch$git_state$git_status$nix_shell$cmd_duration$line_break$sudo$status$shell$character";
+
+        fill.disabled = false;
+        fill.symbol = " ";
         shell.disabled = false;
+        cmd_duration.format = "[$duration]($style) ";
+        git_branch.format = "[$symbol$branch(:$remote_branch)]($style) ";
+        nix_shell.format = "[ $name]($style) ";
       };
     };
 
