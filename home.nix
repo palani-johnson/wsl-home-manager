@@ -54,5 +54,19 @@ in
         shell.disabled = false;
       };
     };
+
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+      enableNushellIntegration = true;
+      enableZshIntegration = true;
+      silent = true;
+    };
+
+    carapace = {
+      enable = true;
+      enableNushellIntegration = true;
+      enableZshIntegration = true;
+    };
   };
 }
