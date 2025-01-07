@@ -25,8 +25,10 @@ in {
       enable = true;
       sessionVariables = sessionVariables;
       dotDir = ".config/zsh";
-      history.path = ".cache/zsh/history";
+      history.path = "$HOME/.cache/zsh/history";
       initExtra = builtins.readFile ./zsh/initExtra.zsh;
+      enableCompletion = true;
+      prezto.enable = true;
     };
 
     nushell = {
