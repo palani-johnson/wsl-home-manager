@@ -11,8 +11,17 @@ in {
     preferXdgDirectories = true;
 
     packages = with pkgs; [
+      # nix
       nixd
       alejandra
+
+      # python
+      (python3.withPackages (p: with p; [ipykernel]))
+      ruff
+
+      # node
+      nodejs
+      nodePackages.prettier
     ];
   };
 
@@ -20,6 +29,12 @@ in {
 
   programs = {
     home-manager.enable = true;
+
+    # mostly used for completions
+    fish = {
+      enable = true;
+      generateCompletions = true;
+    };
 
     zsh = {
       enable = true;
@@ -40,7 +55,11 @@ in {
       enable = true;
       userName = "Palani Johnson";
       userEmail = "palanijohnson@gmail.com";
-      extraConfig.init.defaultBranch = "main";
+
+      extraConfig = {
+        init.defaultBranch = "main";
+        core.pager = "cat";
+      };
     };
 
     starship = {
@@ -69,13 +88,10 @@ in {
       silent = true;
       config = {
         global.warn_timeout = "1m";
+        whitelist.prefix = [
+          "~/Projects"
+        ];
       };
-    };
-
-    carapace = {
-      enable = true;
-      enableNushellIntegration = true;
-      enableZshIntegration = true;
     };
   };
 }
